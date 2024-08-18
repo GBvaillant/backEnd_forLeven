@@ -13,10 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/student")
@@ -50,13 +47,22 @@ public class StudentController {
         return ResponseEntity.ok().body(studentList);
     }
 
-    @GetMapping("/list/{registration}")
+    @GetMapping("/listRegister/{registration}")
     public ResponseEntity<Object> listRegister(@PathVariable String registration) {
-        var student0 = this.studentService.getByRegistration(registration);
-        if (student0 == null) {
+        StudentModel studentRegister = this.studentService.getByRegistration(registration);
+        if (studentRegister == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(student0);
+        return ResponseEntity.status(HttpStatus.OK).body(studentRegister);
+    }
+
+    @GetMapping("/listId/{id}")
+    public ResponseEntity<Object> listById(@PathVariable UUID id) {
+        StudentModel studentId = this.studentService.getId(id);
+        if(studentId == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(studentId);
     }
 
     @PutMapping("/update/{id}")
@@ -87,17 +93,6 @@ public class StudentController {
         }
         studentService.deleteStudent(id);
         return ResponseEntity.status(HttpStatus.OK).body("Student deleted");
-    }
-
-    @DeleteMapping("/deleteNumber/{id}")
-    public ResponseEntity<Object> deleteNumber(@PathVariable UUID id) {
-        var phoneId = phoneService.getPhoneId(id);
-        if(phoneId == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Phone not Found");
-        }
-
-        phoneService.deletePhone(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Phone deleted successfully");
     }
 
 }
