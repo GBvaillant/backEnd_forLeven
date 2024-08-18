@@ -1,6 +1,7 @@
 package com.example.backend_forleven.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,11 +26,14 @@ public class StudentModel {
     @GeneratedValue
     UUID id;
 
+    @Size(min = 3)
     private String name;
+    @Size(min = 3)
     private String lastName;
 
 
     @Column(unique = true)
+    @Size(min = 3)
     private String registration;
 
     @PrePersist

@@ -2,6 +2,7 @@ package com.example.backend_forleven.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class PhoneList {
     @GeneratedValue
     private UUID id;
 
+    @Size(min = 9, max = 9)
     private String number;
 
     @ManyToOne
