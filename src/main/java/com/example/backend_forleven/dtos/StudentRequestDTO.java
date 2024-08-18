@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 public record StudentRequestDTO(
-        @NotBlank(message = "Name must not be blank") String name,
-        @NotBlank(message = "Last name must not be blank") String lastName,
-        @Size(min = 1, message = "At least one phone number must be provided") List<String> phones) {
+        @NotBlank @Size(min = 1, max = 100) String name,
+        @NotBlank @Size(min = 1, max = 100) String lastName,
+        @Size(min = 1) List<String> phones) {
 }
