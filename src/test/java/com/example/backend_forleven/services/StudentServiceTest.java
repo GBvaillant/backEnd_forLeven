@@ -210,7 +210,7 @@ class StudentServiceTest {
 
         studentService.deleteStudent(id);
 
-        verify(studentRepository, times(1)).deleteById(id);
+        verify(studentRepository, times(1)).deleteById(id );
     }
 
 
