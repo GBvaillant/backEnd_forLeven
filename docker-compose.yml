@@ -6,6 +6,6 @@ services:
     image: postgres
     restart: always
     environment:
-      - POSTGRES_DB=
-      - POSTGRES_PASSWORD=
-      - POSTGRES_USER=
+      - POSTGRES_DB=${SPRING_DATASOURCE_DB}
+      - POSTGRES_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - POSTGRES_USER=${SPRING_DATASOURCE_USERNAME}
